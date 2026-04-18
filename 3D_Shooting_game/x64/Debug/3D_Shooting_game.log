@@ -1,0 +1,14 @@
+﻿  3D_Shooting_game.cpp
+  Camera.cpp
+  GameFramework.cpp
+  GameObject.cpp
+  GraphicsPipeline.cpp
+  Mesh.cpp
+  Player.cpp
+  Scene.cpp
+  Timer.cpp
+  stdafx.cpp
+  코드를 생성하고 있습니다...
+  3D_Shooting_game.vcxproj -> C:\Users\giho2\Documents\Github\3D_Shooting_game\x64\Debug\3D_Shooting_game.exe
+  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.
