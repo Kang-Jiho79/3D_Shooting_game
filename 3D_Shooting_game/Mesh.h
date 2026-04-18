@@ -13,6 +13,19 @@ public:
 	XMFLOAT3					m_xmf3Position;
 };
 
+struct CProjectedPolygon
+{
+	POINT	ptVertices[10];
+	int		nVertices;
+	float	fDepth;		// 렌더링 시점의 평균 Z(깊이)값
+	COLORREF color;
+
+	// Z값이 큰(멀리 있는) 폴리곤부터 먼저 그리도록 내림차순 정렬
+	bool operator<(const CProjectedPolygon& other) const {
+		return fDepth > other.fDepth;
+	}
+};
+
 class CPolygon
 {
 public:

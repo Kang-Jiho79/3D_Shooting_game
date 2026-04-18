@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "Scene.h"
 #include "Player.h"
+#include "KeyMgr.h"
 
 class CGameFramework
 {
@@ -34,6 +35,8 @@ private:
 	CPlayer					*m_pPlayer = NULL;
 	CScene					*m_pScene = NULL;
 	CGameObject				*m_pSelectedObject = NULL;
+
+	KeyMgr					m_KeyMgr;
 
 public:
 	void BuildFrameBuffer();

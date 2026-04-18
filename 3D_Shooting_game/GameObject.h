@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Mesh.h"
 #include "Camera.h"
@@ -71,6 +71,31 @@ public:
 	int PickObjectByRayIntersection(XMVECTOR& xmPickPosition, XMMATRIX& xmmtxView, float *pfHitDistance);
 };
 
+class CExplosiveObject : public CGameObject
+{
+public:
+	CExplosiveObject();
+	virtual ~CExplosiveObject();
+
+	bool						m_bBlowingUp = false;
+
+	XMFLOAT4X4					m_pxmf4x4Transforms[EXPLOSION_DEBRISES];
+
+	float						m_fElapsedTimes = 0.0f;
+	float						m_fDuration = 2.5f;
+	float						m_fExplosionSpeed = 10.0f;
+	float						m_fExplosionRotation = 720.0f;
+
+	virtual void Animate(float fElapsedTime);
+	virtual void Render(CCamera* pCamera);
+
+public:
+	static CMesh				*m_pExplosionMesh;
+	static XMFLOAT3				m_pxmf3SphereVectors[EXPLOSION_DEBRISES];
+
+	static void PrepareExplosion();
+};
+
 class CWallsObject : public CGameObject
 {
 public:
@@ -82,20 +107,41 @@ public:
 	XMFLOAT4					m_pxmf4WallPlanes[6];
 };
 
-class CTankObject : public CGameObject
+class CBulletObject : public CGameObject
 {
 public:
-	CTankObject();
-	virtual ~CTankObject();
+	CBulletObject(float fEffectiveRange);
+	virtual ~CBulletObject();
 
-	// ºÎÀ§º° ¿ÀºêÁ§Æ® (ÀÚ½Ä ¿ÀºêÁ§Æ®)
-	CGameObject* m_pTurret = nullptr;
-	CGameObject* m_pGun = nullptr;
+public:
+	virtual void Animate(float fElapsedTime);
 
-	// ºÎ¸ğ¸¦ ±âÁØÀ¸·Î ÇÑ Áö¿ª º¯È¯ Çà·Ä (Local Transform)
-	XMFLOAT4X4 m_xmf4x4LocalTurret;
-	XMFLOAT4X4 m_xmf4x4LocalGun;
+	float						m_fBulletEffectiveRange = 50.0f;
+	XMFLOAT3					m_xmf3FirePosition;
+	float						m_fRotationAngle = 0.0f;
 
-	virtual void Animate(float fElapsedTime) override;
-	virtual void Render(CCamera* pCamera) override;
+	bool						m_bHitSurface = false; // ğŸ’¡ ë°”ë‹¥ ì¶©ëŒ í­ë°œ í”Œë˜ê·¸!
+
+	void SetFirePosition(XMFLOAT3 xmf3FirePosition);
 };
+
+// ğŸ’¡ í­ë°œ íŒŒí‹°í´(íŒŒí¸) í´ë˜ìŠ¤ ìƒˆë¡œ ì¶”ê°€
+#define MAX_PARTICLES 30
+class CParticleSystem : public CGameObject
+{
+public:
+	CParticleSystem();
+	virtual ~CParticleSystem();
+
+	float m_fAge = 0.0f;
+	float m_fLifeTime = 1.0f; // 1ì´ˆ ìœ ì§€
+
+	XMFLOAT3 m_xmf3Positions[MAX_PARTICLES];
+	XMFLOAT3 m_xmf3Velocities[MAX_PARTICLES];
+	DWORD m_dwColors[MAX_PARTICLES];
+
+	void Spawn(XMFLOAT3 xmf3Position);
+	virtual void Animate(float fElapsedTime);
+	virtual void Render(CCamera* pCamera);
+};
+

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Player.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,36 +141,140 @@ void CPlayer::Render(CCamera *pCamera)
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //
-CAirplanePlayer::CAirplanePlayer()
+
+CTankPlayer::CTankPlayer()
 {
-	CCubeMesh *pBulletMesh = new CCubeMesh(1.0f, 4.0f, 1.0f);\
+	// CTankPlayer 본체는 껍데기(카메라 중심축)로만 씁니다.
+	SetMesh(NULL);
+
+	// 1. 하체(Body) 생성 (길이 10)
+	m_pBody = new CGameObject();
+	m_pBody->SetMesh(new CCubeMesh(6.0f, 2.0f, 10.0f));
+	m_pBody->SetColor(RGB(0, 128, 0));
+
+	// 💡 1-1. 전면 범퍼 생성 (노란색/밝은색으로 포인트를 주어 앞을 표시!)
+	m_pBumper = new CGameObject();
+	// 차체 폭보다 약간 작고 얇은 박스
+	m_pBumper->SetMesh(new CCubeMesh(4.0f, 1.0f, 1.0f));
+	m_pBumper->SetColor(RGB(255, 255, 0)); // 노란색
+
+	// 2. 상체(Turret) 생성
+	m_pTurret = new CGameObject();
+	m_pTurret->SetMesh(new CCubeMesh(4.0f, 2.0f, 4.0f));
+	m_pTurret->SetColor(RGB(0, 150, 0));
+
+	// 3. 포신(Gun) 생성
+	m_pGun = new CGameObject();
+	m_pGun->SetMesh(new CCubeMesh(0.5f, 0.5f, 6.0f));
+	m_pGun->SetColor(RGB(64, 64, 64));
+
+	for (int i = 0; i < BULLETS; i++)
+	{
+		m_ppBullets[i] = new CBulletObject(m_fBulletEffectiveRange);
+		m_ppBullets[i]->SetMesh(new CCubeMesh(0.5f, 0.5f, 1.0f));
+		m_ppBullets[i]->SetMovingSpeed(20.0f);
+		m_ppBullets[i]->SetActive(false);
+	}
 }
 
-CAirplanePlayer::~CAirplanePlayer()
+CTankPlayer::~CTankPlayer()
 {
+	if (m_pBody) delete m_pBody;
+	if (m_pBumper) delete m_pBumper;
+	if (m_pTurret) delete m_pTurret;
+	if (m_pGun) delete m_pGun;
+	for (int i = 0; i < BULLETS; i++) if (m_ppBullets[i]) delete m_ppBullets[i];
 }
 
-void CAirplanePlayer::Animate(float fElapsedTime)
+void CTankPlayer::Animate(float fElapsedTime)
 {
-	CPlayer::Animate(fElapsedTime);\
+	CPlayer::Animate(fElapsedTime);
+
+	if (m_pBody) m_pBody->Animate(fElapsedTime);
+	if (m_pBumper) m_pBumper->Animate(fElapsedTime);
+	if (m_pTurret) m_pTurret->Animate(fElapsedTime);
+	if (m_pGun) m_pGun->Animate(fElapsedTime);
+
+	for (int i = 0; i < BULLETS; i++)
+		if (m_ppBullets[i]->m_bActive) m_ppBullets[i]->Animate(fElapsedTime);
 }
 
-void CAirplanePlayer::OnUpdateTransform()
+void CTankPlayer::OnUpdateTransform()
 {
+	// 💡 1. 본체(상체 + 카메라) 월드 행렬 업데이트
 	CPlayer::OnUpdateTransform();
 
-	m_xmf4x4World = Matrix4x4::Multiply(XMMatrixRotationRollPitchYaw(XMConvertToRadians(90.0f), 0.0f, 0.0f), m_xmf4x4World);
+	// 2. 하체(Body) 행렬 연산
+	XMFLOAT4X4 xmtxBodyRot = Matrix4x4::RotationYawPitchRoll(0.0f, m_fBodyYaw, 0.0f);
+	XMFLOAT4X4 xmtxTrans = Matrix4x4::Translate(m_xmf3Position.x, m_xmf3Position.y, m_xmf3Position.z);
+	if (m_pBody) m_pBody->m_xmf4x4World = Matrix4x4::Multiply(xmtxBodyRot, xmtxTrans);
+
+	// 💡 2-1. 범퍼 행렬 연산 (하체를 부모로 삼아 앞쪽(Z축 방향) 상단에 부착)
+	XMFLOAT4X4 xmtxBumperLocal = Matrix4x4::Translate(0.0f, 0.5f, 5.5f); // Z축으로 5.0f 전진 (차체 길이가 10이므로 끝단에 붙음)
+	if (m_pBumper && m_pBody)
+		m_pBumper->m_xmf4x4World = Matrix4x4::Multiply(xmtxBumperLocal, m_pBody->m_xmf4x4World);
+
+
+
+	// 💡 3. 상체(Turret) 행렬 연산: CPlayer(현재 클래스)의 회전과 위치를 그대로 쓰되 Y축으로 2.0f 오프셋
+	XMFLOAT4X4 xmtxTurretTrans = Matrix4x4::Translate(0.0f, 2.0f, 0.0f);
+	if (m_pTurret) m_pTurret->m_xmf4x4World = Matrix4x4::Multiply(xmtxTurretTrans, m_xmf4x4World);
+
+	// 💡 4. 포신(Gun) 행렬 연산: 상체 행렬을 부모로 하여 상하 각도(GunPitch)와 Z축 오프셋 적용
+	XMFLOAT4X4 xmtxGunRot = Matrix4x4::RotationYawPitchRoll(m_fGunPitch, 0.0f, 0.0f);
+	XMFLOAT4X4 xmtxGunTrans = Matrix4x4::Translate(0.0f, 0.0f, 3.0f);
+	XMFLOAT4X4 xmtxGunLocal = Matrix4x4::Multiply(xmtxGunRot, xmtxGunTrans);
+	if (m_pGun && m_pTurret) m_pGun->m_xmf4x4World = Matrix4x4::Multiply(xmtxGunLocal, m_pTurret->m_xmf4x4World);
 }
 
-void CAirplanePlayer::Render(CCamera *pCamera)
+void CTankPlayer::Render(CCamera* pCamera)
 {
-	CPlayer::Render(pCamera);
+	if (m_pBody) m_pBody->Render(pCamera);
+	if (m_pBumper) m_pBumper->Render(pCamera);
+	if (m_pTurret) m_pTurret->Render(pCamera);
+	if (m_pGun) m_pGun->Render(pCamera);
 
+	for (int i = 0; i < BULLETS; i++)
+		if (m_ppBullets[i]->m_bActive) m_ppBullets[i]->Render(pCamera);
 }
 
-void CAirplanePlayer::FireBullet(CGameObject *pSelectedObject)
+void CTankPlayer::RotateBody(float fAngle) { m_fBodyYaw += fAngle; }
+void CTankPlayer::RotateGun(float fAngle)
 {
-	if (pSelectedObject) LookAt(pSelectedObject->GetPosition(), XMFLOAT3(0.0f, 1.0f, 0.0f));
+	m_fGunPitch += fAngle;
 
+	if (m_fGunPitch > 10.0f) m_fGunPitch = 10.0f;
+	if (m_fGunPitch < -60.0f) m_fGunPitch = -60.0f;
+}
+void CTankPlayer::MoveBody(float fDistance)
+{
+	// 하체의 앞방향(Look 벡터) 계산
+	XMFLOAT3 xmf3BodyLook = XMFLOAT3(sinf(XMConvertToRadians(m_fBodyYaw)), 0.0f, cosf(XMConvertToRadians(m_fBodyYaw)));
+	XMFLOAT3 xmf3Shift = Vector3::ScalarProduct(Vector3::Normalize(xmf3BodyLook), fDistance);
+	Move(xmf3Shift, false);
+}
+
+void CTankPlayer::FireBullet(CGameObject* pSelectedObject)
+{
 	OnUpdateTransform();
+	CBulletObject* pBulletObject = NULL;
+	for (int i = 0; i < BULLETS; i++)
+	{
+		if (!m_ppBullets[i]->m_bActive)
+		{
+			pBulletObject = m_ppBullets[i];
+			break;
+		}
+	}
+	if (pBulletObject && m_pGun)
+	{
+		XMFLOAT3 xmf3GunPos = m_pGun->GetPosition();
+		XMFLOAT3 xmf3GunDir = m_pGun->GetLook();
+		XMFLOAT3 xmf3FirePosition = Vector3::Add(xmf3GunPos, Vector3::ScalarProduct(xmf3GunDir, 4.0f));
+
+		pBulletObject->m_xmf4x4World = m_pGun->m_xmf4x4World; // 상하 회전값 복사
+		pBulletObject->SetFirePosition(xmf3FirePosition);
+		pBulletObject->SetMovingDirection(xmf3GunDir);
+		pBulletObject->SetActive(true);
+	}
 }

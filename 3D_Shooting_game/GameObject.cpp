@@ -1,4 +1,4 @@
-#include "stdAfx.h"
+ï»¿#include "StdAfx.h"
 #include "GameObject.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,7 +205,74 @@ CWallsObject::~CWallsObject()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
+//
+XMFLOAT3 CExplosiveObject::m_pxmf3SphereVectors[EXPLOSION_DEBRISES];
+CMesh *CExplosiveObject::m_pExplosionMesh = NULL;
+
+CExplosiveObject::CExplosiveObject()
+{
+}
+
+CExplosiveObject::~CExplosiveObject()
+{
+}
+
+void CExplosiveObject::PrepareExplosion()
+{
+	for (int i = 0; i < EXPLOSION_DEBRISES; i++) XMStoreFloat3(&m_pxmf3SphereVectors[i], ::RandomUnitVectorOnSphere());
+
+	m_pExplosionMesh = new CCubeMesh(0.5f, 0.5f, 0.5f);
+}
+
+void CExplosiveObject::Animate(float fElapsedTime)
+{
+	if (m_bBlowingUp)
+	{
+		m_fElapsedTimes += fElapsedTime;
+		if (m_fElapsedTimes <= m_fDuration)
+		{
+			XMFLOAT3 xmf3Position = GetPosition();
+			for (int i = 0; i < EXPLOSION_DEBRISES; i++)
+			{
+				m_pxmf4x4Transforms[i] = Matrix4x4::Identity();
+				m_pxmf4x4Transforms[i]._41 = xmf3Position.x + m_pxmf3SphereVectors[i].x * m_fExplosionSpeed * m_fElapsedTimes;
+				m_pxmf4x4Transforms[i]._42 = xmf3Position.y + m_pxmf3SphereVectors[i].y * m_fExplosionSpeed * m_fElapsedTimes;
+				m_pxmf4x4Transforms[i]._43 = xmf3Position.z + m_pxmf3SphereVectors[i].z * m_fExplosionSpeed * m_fElapsedTimes;
+				m_pxmf4x4Transforms[i] = Matrix4x4::Multiply(Matrix4x4::RotationAxis(m_pxmf3SphereVectors[i], m_fExplosionRotation * m_fElapsedTimes), m_pxmf4x4Transforms[i]);
+			}
+		}
+		else
+		{
+			m_bBlowingUp = false;
+			m_fElapsedTimes = 0.0f;
+		}
+	}
+	else
+	{
+		CGameObject::Animate(fElapsedTime);
+	}
+}
+
+void CExplosiveObject::Render(CCamera* pCamera)
+{
+	if (m_bBlowingUp)
+	{
+		for (int i = 0; i < EXPLOSION_DEBRISES; i++)
+		{
+			if (m_pExplosionMesh)
+			{
+				m_pExplosionMesh->Render(m_pxmf4x4Transforms[i], m_dwColor, pCamera);
+			}
+		}
+	}
+	else
+	{
+		CGameObject::Render(pCamera);
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//
 CBulletObject::CBulletObject(float fEffectiveRange)
 {
 	m_fBulletEffectiveRange = fEffectiveRange;
@@ -223,94 +290,107 @@ void CBulletObject::SetFirePosition(XMFLOAT3 xmf3FirePosition)
 
 void CBulletObject::Animate(float fElapsedTime)
 {
+	// ğŸ’¡ 1. í˜„ì¬ ì´ì•Œì˜ ì‹¤ì œ 3D ì†ë„ ë²¡í„° ê³„ì‚° (ë°©í–¥ * ì†ë„)
+	XMFLOAT3 xmf3Velocity = Vector3::ScalarProduct(m_xmf3MovingDirection, m_fMovingSpeed, false);
+
+	// ğŸ’¡ 2. ì¤‘ë ¥ ê°€ì†ë„ ì ìš© (ë§¤ í”„ë ˆì„ ì•„ë˜ë¡œ ë–¨ì–´ì§€ëŠ” í˜ ëˆ„ì )
+	xmf3Velocity.y -= GRAVITY * fElapsedTime;
+
+	// ğŸ’¡ 3. ë³€ê²½ëœ ì†ë„ ë²¡í„°ì—ì„œ ìƒˆë¡œìš´ ë°©í–¥ê³¼ ì†ë„ ì¶”ì¶œ
+	m_fMovingSpeed = Vector3::Length(xmf3Velocity);
+	m_xmf3MovingDirection = Vector3::Normalize(xmf3Velocity);
+
+	// ì´ë™ ê±°ë¦¬ = ìƒˆë¡œìš´ ì†ë„ * ì‹œê°„
 	float fDistance = m_fMovingSpeed * fElapsedTime;
-#ifdef _WITH_VECTOR_OPERATION
-	XMFLOAT3 xmf3Position = GetPosition();
 
-	m_fRotationAngle += m_fRotationSpeed * fElapsedTime;
-	if (m_fRotationAngle > 360.0f) m_fRotationAngle = m_fRotationAngle - 360.0f;
-
-	XMFLOAT4X4 mtxRotate1 = Matrix4x4::RotationYawPitchRoll(0.0f, m_fRotationAngle, 0.0f);
-
-	XMFLOAT3 xmf3RotationAxis = Vector3::CrossProduct(m_xmf3RotationAxis, m_xmf3MovingDirection, true);
-	float fDotProduct = Vector3::DotProduct(m_xmf3RotationAxis, m_xmf3MovingDirection);
-	float fRotationAngle = ::IsEqual(fDotProduct, 1.0f) ? 0.0f : (float)XMConvertToDegrees(acos(fDotProduct));
-	XMFLOAT4X4 mtxRotate2 = Matrix4x4::RotationAxis(xmf3RotationAxis, fRotationAngle);
-
-	m_xmf4x4World = Matrix4x4::Multiply(mtxRotate1, mtxRotate2);
-
-	XMFLOAT3 xmf3Movement = Vector3::ScalarProduct(m_xmf3MovingDirection, fDistance, false);
-	xmf3Position = Vector3::Add(xmf3Position, xmf3Movement);
-	SetPosition(xmf3Position);
-#else
+	// í¬íƒ„ íšŒì „
 	XMFLOAT4X4 mtxRotate = Matrix4x4::RotationYawPitchRoll(0.0f, m_fRotationSpeed * fElapsedTime, 0.0f);
 	m_xmf4x4World = Matrix4x4::Multiply(mtxRotate, m_xmf4x4World);
+
+	// ì´ë™ ì ìš©ë¶€
 	XMFLOAT3 xmf3Movement = Vector3::ScalarProduct(m_xmf3MovingDirection, fDistance, false);
 	XMFLOAT3 xmf3Position = GetPosition();
 	xmf3Position = Vector3::Add(xmf3Position, xmf3Movement);
 	SetPosition(xmf3Position);
-#endif
 
 	UpdateBoundingBox();
 
-	if (Vector3::Distance(m_xmf3FirePosition, GetPosition()) > m_fBulletEffectiveRange) SetActive(false);
-}
-*/
-
-CTankObject::CTankObject()
-{
-	// 1. °¢ ºÎÀ§º° ´õ¹Ì ¸Ş½¬¸¦ »ı¼ºÇÕ´Ï´Ù. (CCubeMesh µîÀ» È°¿ë)
-	// ½ÇÁ¦·Î´Â CTankBaseMesh, CTankTurretMesh µîÀ» µû·Î ¸¸µå½Ã¸é ÁÁ½À´Ï´Ù.
-	CMesh* pBaseMesh = new CCubeMesh(6.0f, 2.0f, 10.0f);
-	CMesh* pTurretMesh = new CCubeMesh(4.0f, 2.0f, 4.0f);
-	CMesh* pGunMesh = new CCubeMesh(1.0f, 1.0f, 8.0f);
-
-	this->SetMesh(pBaseMesh);
-	this->SetColor(RGB(0, 128, 0));
-
-	m_pTurret = new CGameObject(pTurretMesh);
-	m_pTurret->SetColor(RGB(0, 100, 0));
-
-	m_pGun = new CGameObject(pGunMesh);
-	m_pGun->SetColor(RGB(0, 80, 0));
-
-	// 2. ºÎ¸ğ¸¦ ±âÁØÀ¸·Î ÇÑ ÃÊ±â À§Ä¡(Local Matrix) ¼³Á¤
-	m_xmf4x4LocalTurret = Matrix4x4::Translate(0.0f, 2.0f, 0.0f);   // Â÷Ã¼ À§ÂÊ¿¡ ¹èÄ¡
-	m_xmf4x4LocalGun = Matrix4x4::Translate(0.0f, 0.5f, 4.0f);      // Æ÷Å¾ÀÇ ¾ÕÂÊ¿¡ ¹èÄ¡
+	// ë•…ì— ë–¨ì–´ì§€ë©´(y <= 0) ì—†ì• ê±°ë‚˜ ê±°ë¦¬ë¥¼ ì´ˆê³¼í•˜ë©´ ì—†ì•° (íƒ±í¬ ë°”ë‹¥ ì¡°ê±´)
+	if (GetPosition().y <= 0.0f || Vector3::Distance(m_xmf3FirePosition, GetPosition()) > m_fBulletEffectiveRange)
+	{
+		if (GetPosition().y <= 0.0f) m_bHitSurface = true; // ğŸ’¡ ë°”ë‹¥ì— ë§ìœ¼ë©´ íŒŒí‹°í´ í„°ì§€ë¼ê³  ì‹ í˜¸ ë³´ëƒ„
+		SetActive(false);
+	}
 }
 
-CTankObject::~CTankObject()
+// -----------------------------------------------------
+// ğŸ’¡ ì•„ë˜ì— CParticleSystem ì „ì²´ êµ¬í˜„ì„ ë³µì‚¬í•´ ë„£ìŠµë‹ˆë‹¤!
+CParticleSystem::CParticleSystem()
 {
-	if (m_pTurret) delete m_pTurret;
-	if (m_pGun) delete m_pGun;
+	SetMesh(new CCubeMesh(0.4f, 0.4f, 0.4f)); // íŒŒí¸ì€ ì‘ì€ íë¸Œ
+	m_bActive = false;
+}
+CParticleSystem::~CParticleSystem() {}
+
+void CParticleSystem::Spawn(XMFLOAT3 xmf3Position)
+{
+	m_bActive = true;
+	m_fAge = 0.0f;
+
+	// í­ë°œ ìƒ‰ìƒ ë°°ì—´ (ë¹¨ê°•, ì£¼í™©, ë…¸ë‘)
+	DWORD colors[3] = { RGB(255, 0, 0), RGB(255, 128, 0), RGB(255, 255, 0) };
+
+	for (int i = 0; i < MAX_PARTICLES; i++)
+	{
+		m_xmf3Positions[i] = xmf3Position;
+
+		// ëœë¤ ë°©ì‚¬í˜• ì†ë„
+		float fx = ((rand() % 100) / 50.0f) - 1.0f;
+		float fy = ((rand() % 100) / 50.0f) + 0.5f; // ìœ„ìª½ìœ¼ë¡œ íŠ€ì–´ì˜¤ë¦„
+		float fz = ((rand() % 100) / 50.0f) - 1.0f;
+		XMFLOAT3 dir = Vector3::Normalize(XMFLOAT3(fx, fy, fz));
+		float speed = 10.0f + (rand() % 20); // 10~30 ì‚¬ì´ì˜ íŒŒí¸ ì†ë„
+
+		m_xmf3Velocities[i] = Vector3::ScalarProduct(dir, speed, false);
+		m_dwColors[i] = colors[rand() % 3];
+	}
 }
 
-void CTankObject::Animate(float fElapsedTime)
+void CParticleSystem::Animate(float fElapsedTime)
 {
-	// 1. Â÷Ã¼(Base) ¾÷µ¥ÀÌÆ®
-	CGameObject::Animate(fElapsedTime);
+	if (!m_bActive) return;
 
-	// 2. Æ÷Å¾(Turret) È¸Àü ·ÎÁ÷ ¿¹½Ã (µ¶¸³ÀûÀÎ YÃà È¸Àü)
-	// m_pTurret->Rotate(0.0f, TurretRotationSpeed * fElapsedTime, 0.0f);
+	m_fAge += fElapsedTime;
+	if (m_fAge > m_fLifeTime) {
+		m_bActive = false;
+		return;
+	}
 
-	// 3. ÀÚ½Ä ¿ÀºêÁ§Æ®µéÀÇ ¿ùµå Çà·Ä = (ÀÚ½ÅÀÇ ·ÎÄÃ º¯È¯) * (ºÎ¸ğÀÇ ¿ùµå Çà·Ä)
-	// Æ÷Å¾ ¿ùµå Çà·Ä = Æ÷Å¾ ·ÎÄÃ Çà·Ä * Â÷Ã¼ ¿ùµå Çà·Ä
-	m_pTurret->m_xmf4x4World = Matrix4x4::Multiply(m_xmf4x4LocalTurret, this->m_xmf4x4World);
+	for (int i = 0; i < MAX_PARTICLES; i++)
+	{
+		// ì¤‘ë ¥ ê°€ì†ë„
+		m_xmf3Velocities[i].y -= 30.0f * fElapsedTime;
 
-	// Æ÷½Å ¿ùµå Çà·Ä = Æ÷½Å ·ÎÄÃ Çà·Ä * Æ÷Å¾ ¿ùµå Çà·Ä
-	m_pGun->m_xmf4x4World = Matrix4x4::Multiply(m_xmf4x4LocalGun, m_pTurret->m_xmf4x4World);
+		// ì´ë™
+		XMFLOAT3 move = Vector3::ScalarProduct(m_xmf3Velocities[i], fElapsedTime, false);
+		m_xmf3Positions[i] = Vector3::Add(m_xmf3Positions[i], move);
 
-	// ÀÚ½ÄµéÀÇ ¹Ù¿îµù ¹Ú½º ¾÷µ¥ÀÌÆ® µî
-	m_pTurret->Animate(fElapsedTime);
-	m_pGun->Animate(fElapsedTime);
+		// ë°”ë‹¥ì— í†µí†µ íŠ•ê¸°ê±°ë‚˜ ë©ˆì¶”ê¸°
+		if (m_xmf3Positions[i].y < 0.0f) {
+			m_xmf3Positions[i].y = 0.0f;
+			m_xmf3Velocities[i].y *= -0.5f; // ë°”ë‹¥ì— ë‹¿ìœ¼ë©´ ë°˜ë°œë¡œ ì‚´ì§ íŠ
+		}
+	}
 }
 
-void CTankObject::Render(CCamera* pCamera)
+void CParticleSystem::Render(CCamera* pCamera)
 {
-	// ÀÚ½Å(Â÷Ã¼) ·»´õ¸µ
-	CGameObject::Render(pCamera);
+	if (!m_bActive || !m_pMesh) return;
 
-	// ÀÚ½Ä(Æ÷Å¾, Æ÷½Å) ·»´õ¸µ
-	if (m_pTurret) m_pTurret->Render(pCamera);
-	if (m_pGun) m_pGun->Render(pCamera);
+	for (int i = 0; i < MAX_PARTICLES; i++)
+	{
+		// ê° íŒŒí¸ì˜ ìœ„ì¹˜ë§Œ ì ìš©í•˜ì—¬ ë‹¤ì¤‘ ë Œë”ë§
+		XMFLOAT4X4 matWorld = Matrix4x4::Translate(m_xmf3Positions[i].x, m_xmf3Positions[i].y, m_xmf3Positions[i].z);
+		m_pMesh->Render(matWorld, m_dwColors[i], pCamera);
+	}
 }

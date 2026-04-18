@@ -9,6 +9,8 @@
 CGameFramework::CGameFramework()
 {
 	_tcscpy_s(m_pszFrameRate, _T("LabProject ("));
+
+	m_KeyMgr.Init();
 }
 
 CGameFramework::~CGameFramework()
@@ -45,8 +47,6 @@ void CGameFramework::BuildFrameBuffer()
 
 	m_hDCFrameBuffer = ::CreateCompatibleDC(hDC);
 
-	// 💡 파이프라인의 전역 변수인 g_pColorBuffer에 직접 DIB 메모리를 연결합니다.
-	// (기존의 m_pColorBuffer 멤버 변수는 쓰지 않습니다!)
 	m_hBitmapFrameBuffer = ::CreateDIBSection(hDC, &bmi, DIB_RGB_COLORS, (void**)&g_pColorBuffer, NULL, 0);
 
 	::SelectObject(m_hDCFrameBuffer, m_hBitmapFrameBuffer);
@@ -66,28 +66,6 @@ void CGameFramework::PresentFrameBuffer()
     ::ReleaseDC(m_hWnd, hDC);
 }
 
-void CGameFramework::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
-{
-	switch (nMessageID)
-	{
-		case WM_RBUTTONDOWN:
-			m_pSelectedObject = m_pScene->PickObjectPointedByCursor(LOWORD(lParam), HIWORD(lParam), m_pPlayer->m_pCamera);
-			break;
-		case WM_LBUTTONDOWN:
-			::SetCapture(hWnd);
-			::GetCursorPos(&m_ptOldCursorPos);
-			break;
-		case WM_LBUTTONUP:
-		case WM_RBUTTONUP:
-			::ReleaseCapture();
-			break;
-		case WM_MOUSEMOVE:
-			break;
-		default:
-			break;
-	}
-}
-
 void CGameFramework::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
 {
 	switch (nMessageID)
@@ -98,13 +76,10 @@ void CGameFramework::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPA
 				case VK_ESCAPE:
 					::PostQuitMessage(0);
 					break;
-				case VK_RETURN:
-					break;
 				case VK_CONTROL:
-					((CAirplanePlayer *)m_pPlayer)->FireBullet(m_pSelectedObject);
+					((CTankPlayer *)m_pPlayer)->FireBullet(m_pSelectedObject);
 					break;
 				default:
-					m_pScene->OnProcessingKeyboardMessage(hWnd, nMessageID, wParam, lParam);
 					break;
 			}
 			break;
@@ -117,40 +92,28 @@ LRESULT CALLBACK CGameFramework::OnProcessingWindowMessage(HWND hWnd, UINT nMess
 {
 	switch (nMessageID)
 	{
-		case WM_ACTIVATE:
-		{
-			if (LOWORD(wParam) == WA_INACTIVE)
-				m_GameTimer.Stop();
-			else
-				m_GameTimer.Start();
-			break;
-		}
-		case WM_SIZE:
-			break;
-		case WM_LBUTTONDOWN:
-		case WM_RBUTTONDOWN:
-		case WM_LBUTTONUP:
-		case WM_RBUTTONUP:
-		case WM_MOUSEMOVE:
-			OnProcessingMouseMessage(hWnd, nMessageID, wParam, lParam);
-			break;
-		case WM_KEYDOWN:
-		case WM_KEYUP:
-			OnProcessingKeyboardMessage(hWnd, nMessageID, wParam, lParam);
-			break;
-		}
-		return(0);
+	case WM_ACTIVATE:
+	{
+		if (LOWORD(wParam) == WA_INACTIVE) m_GameTimer.Stop();
+		else m_GameTimer.Start();
+		break;
+	}
+	case WM_KEYDOWN:
+	case WM_KEYUP:
+		OnProcessingKeyboardMessage(hWnd, nMessageID, wParam, lParam);
+		break;
+	}
+	return(0);
 }
 
 void CGameFramework::BuildObjects()
 {
-	CAirplaneMesh *pAirplaneMesh = new CAirplaneMesh(6.0f, 6.0f, 1.0f);
-
-	m_pPlayer = new CAirplanePlayer();
+	m_pPlayer = new CTankPlayer();
 	m_pPlayer->SetPosition(0.0f, 0.0f, 0.0f);
-	m_pPlayer->SetMesh(pAirplaneMesh);
-	m_pPlayer->SetColor(RGB(0, 0, 255));
-	m_pPlayer->SetCameraOffset(XMFLOAT3(0.0f, 5.0f, -15.0f));
+	m_pPlayer->SetColor(RGB(0, 255, 0)); // 탱크는 보통 녹색 계열
+
+	// 카메라 오프셋: 탱크를 좀 더 위쪽/뒤쪽에서 내려다보는 3인칭 뷰 (Back View)
+	m_pPlayer->SetCameraOffset(XMFLOAT3(0.0f, 15.0f, -30.0f));
 
 	m_pScene = new CScene();
 	m_pScene->BuildObjects();
@@ -183,38 +146,28 @@ void CGameFramework::OnDestroy()
 
 void CGameFramework::ProcessInput()
 {
-	static UCHAR pKeyBuffer[256];
-	DWORD dwDirection = 0;
-	if (GetKeyboardState(pKeyBuffer))
-	{
-		if (pKeyBuffer[VK_UP] & 0xF0) dwDirection |= DIR_FORWARD;
-		if (pKeyBuffer[VK_DOWN] & 0xF0) dwDirection |= DIR_BACKWARD;
-		if (pKeyBuffer[VK_LEFT] & 0xF0) dwDirection |= DIR_LEFT;
-		if (pKeyBuffer[VK_RIGHT] & 0xF0) dwDirection |= DIR_RIGHT;
-		if (pKeyBuffer[VK_PRIOR] & 0xF0) dwDirection |= DIR_UP;
-		if (pKeyBuffer[VK_NEXT] & 0xF0) dwDirection |= DIR_DOWN;
-	}
-	float cxDelta = 0.0f, cyDelta = 0.0f;
-	POINT ptCursorPos;
-	if (GetCapture() == m_hWnd)
-	{
-		SetCursor(NULL);
-		GetCursorPos(&ptCursorPos);
-		cxDelta = (float)(ptCursorPos.x - m_ptOldCursorPos.x) / 3.0f;
-		cyDelta = (float)(ptCursorPos.y - m_ptOldCursorPos.y) / 3.0f;
-		SetCursorPos(m_ptOldCursorPos.x, m_ptOldCursorPos.y);
-	}
-	if ((dwDirection != 0) || (cxDelta != 0.0f) || (cyDelta != 0.0f))
-	{
-		if (cxDelta || cyDelta)
-		{
-			if (pKeyBuffer[VK_RBUTTON] & 0xF0)
-				m_pPlayer->Rotate(cyDelta, 0.0f, -cxDelta);
-			else
-				m_pPlayer->Rotate(cyDelta, cxDelta, 0.0f);
-		}
-		if (dwDirection) m_pPlayer->Move(dwDirection, 0.15f);
-	}
+	m_KeyMgr.Update();
+
+	float fMoveSpeed = 15.0f * m_GameTimer.GetTimeElapsed();
+	float fRotationSpeed = 90.0f * m_GameTimer.GetTimeElapsed();
+
+	// 1. W/S (하체 기준으로 앞/뒤 이동)
+	if (m_KeyMgr.GetKeyState(KEY::W) == KEY_STATE::HOLD) ((CTankPlayer*)m_pPlayer)->MoveBody(fMoveSpeed);
+	if (m_KeyMgr.GetKeyState(KEY::S) == KEY_STATE::HOLD) ((CTankPlayer*)m_pPlayer)->MoveBody(-fMoveSpeed);
+
+	// 2. A/D (하체만 좌우로 회전)
+	if (m_KeyMgr.GetKeyState(KEY::A) == KEY_STATE::HOLD) ((CTankPlayer*)m_pPlayer)->RotateBody(-fRotationSpeed);
+	if (m_KeyMgr.GetKeyState(KEY::D) == KEY_STATE::HOLD) ((CTankPlayer*)m_pPlayer)->RotateBody(fRotationSpeed);
+
+	// 3. 방향키 좌/우 (상체와 카메라가 같이 회전)
+	// CPlayer의 Rotate를 호출하면 카메라가 자동으로 따라옵니다.
+	if (m_KeyMgr.GetKeyState(KEY::LEFT) == KEY_STATE::HOLD) m_pPlayer->Rotate(0.0f, -fRotationSpeed, 0.0f);
+	if (m_KeyMgr.GetKeyState(KEY::RIGHT) == KEY_STATE::HOLD) m_pPlayer->Rotate(0.0f, fRotationSpeed, 0.0f);
+
+	// 4. 방향키 상/하 (포신 상하 각도 조절)
+	if (m_KeyMgr.GetKeyState(KEY::UP) == KEY_STATE::HOLD) ((CTankPlayer*)m_pPlayer)->RotateGun(-fRotationSpeed * 0.5f);
+	if (m_KeyMgr.GetKeyState(KEY::DOWN) == KEY_STATE::HOLD) ((CTankPlayer*)m_pPlayer)->RotateGun(fRotationSpeed * 0.5f);
+
 	m_pPlayer->Update(m_GameTimer.GetTimeElapsed());
 }
 

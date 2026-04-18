@@ -64,6 +64,8 @@ using namespace DirectX::PackedVector;
 
 #define EXPLOSION_DEBRISES		100
 
+#define GRAVITY				9.8f
+
 //#define _WITH_VECTOR_OPERATION
 
 #define EPSILON					1.0e-6f

@@ -9,10 +9,6 @@ CScene::~CScene()
 {
 }
 
-void CScene::OnProcessingMouseMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
-{
-}
-
 void CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wParam, LPARAM lParam)
 {
 	switch (nMessageID)
@@ -29,6 +25,17 @@ void CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPar
 				case '7':
 				case '8':
 				case '9':
+				{
+					CExplosiveObject *pExplosiveObject = (CExplosiveObject *)m_ppObjects[int(wParam - '1')];
+					pExplosiveObject->m_bBlowingUp = true;
+					break;
+				}
+				case 'A':
+					for (int i = 0; i < m_nObjects; i++)
+					{
+						CExplosiveObject *pExplosiveObject = (CExplosiveObject *)m_ppObjects[i];
+						pExplosiveObject->m_bBlowingUp = true;
+					}
 					break;
 				default:
 					break;
@@ -41,23 +48,128 @@ void CScene::OnProcessingKeyboardMessage(HWND hWnd, UINT nMessageID, WPARAM wPar
 
 void CScene::BuildObjects()
 {
-	// 1. 벽(Wall) 지우기 (NULL 처리)
-	m_pWallsObject = NULL;
+	CExplosiveObject::PrepareExplosion();
 
-	// 2. 단 1개의 오브젝트(탱크)만 생성
-	m_nObjects = 1;
-	m_ppObjects = new CGameObject * [m_nObjects];
+	float fHalfWidth = 45.0f, fHalfHeight = 10.0f, fHalfDepth = 110.0f;
+	CWallMesh *pWallCubeMesh = new CWallMesh(fHalfWidth * 2.0f, fHalfHeight * 2.0f, fHalfDepth * 2.0f, 30);
 
-	// 방금 만든 탱크 객체 생성 및 배치
-	m_ppObjects[0] = new CTankObject();
-	m_ppObjects[0]->SetPosition(0.0f, 0.0f, 20.0f); // 카메라 앞쪽에 배치
-	// m_ppObjects[0]->SetRotationSpeed(45.0f); // (선택) 잘 돌아가는지 보려면 회전 추가
+	m_pWallsObject = new CWallsObject();
+	m_pWallsObject->SetPosition(0.0f, fHalfHeight - 1.0f, 0.0f);
+	m_pWallsObject->SetMesh(pWallCubeMesh);
+	m_pWallsObject->SetColor(RGB(255, 0, 0));
+	m_pWallsObject->m_pxmf4WallPlanes[0] = XMFLOAT4(+1.0f, 0.0f, 0.0f, fHalfWidth);
+	m_pWallsObject->m_pxmf4WallPlanes[1] = XMFLOAT4(-1.0f, 0.0f, 0.0f, fHalfWidth);
+	m_pWallsObject->m_pxmf4WallPlanes[2] = XMFLOAT4(0.0f, +1.0f, 0.0f, fHalfHeight);
+	m_pWallsObject->m_pxmf4WallPlanes[3] = XMFLOAT4(0.0f, -1.0f, 0.0f, fHalfHeight);
+	m_pWallsObject->m_pxmf4WallPlanes[4] = XMFLOAT4(0.0f, 0.0f, +1.0f, fHalfDepth);
+	m_pWallsObject->m_pxmf4WallPlanes[5] = XMFLOAT4(0.0f, 0.0f, -1.0f, fHalfDepth);
+	m_pWallsObject->m_xmOOBBPlayerMoveCheck = BoundingOrientedBox(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(fHalfWidth, fHalfHeight, fHalfDepth * 0.05f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	CCubeMesh *pObjectCubeMesh = new CCubeMesh(4.0f, 4.0f, 4.0f);
+
+	m_nObjects = 10;
+	m_ppObjects = new CGameObject*[m_nObjects];
+
+	m_ppObjects[0] = new CExplosiveObject();
+	m_ppObjects[0]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[0]->SetColor(RGB(255, 0, 0));
+	m_ppObjects[0]->SetPosition(-13.5f, 0.0f, -14.0f);
+	m_ppObjects[0]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 1.0f));
+	m_ppObjects[0]->SetRotationSpeed(90.0f);
+	m_ppObjects[0]->SetMovingDirection(XMFLOAT3(1.0f, 0.0f, 0.0f));
+	m_ppObjects[0]->SetMovingSpeed(10.5f);
+
+	m_ppObjects[1] = new CExplosiveObject();
+	m_ppObjects[1]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[1]->SetColor(RGB(0, 0, 255));
+	m_ppObjects[1]->SetPosition(+13.5f, 0.0f, -14.0f);
+	m_ppObjects[1]->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	m_ppObjects[1]->SetRotationSpeed(180.0f);
+	m_ppObjects[1]->SetMovingDirection(XMFLOAT3(-1.0f, 0.0f, 0.0f));
+	m_ppObjects[1]->SetMovingSpeed(8.8f);
+
+	m_ppObjects[2] = new CExplosiveObject();
+	m_ppObjects[2]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[2]->SetColor(RGB(0, 255, 0));
+	m_ppObjects[2]->SetPosition(0.0f, +5.0f, 20.0f);
+	m_ppObjects[2]->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	m_ppObjects[2]->SetRotationSpeed(30.15f);
+	m_ppObjects[2]->SetMovingDirection(XMFLOAT3(1.0f, -1.0f, 0.0f));
+	m_ppObjects[2]->SetMovingSpeed(5.2f);
+
+	m_ppObjects[3] = new CExplosiveObject();
+	m_ppObjects[3]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[3]->SetColor(RGB(0, 255, 255));
+	m_ppObjects[3]->SetPosition(0.0f, 0.0f, 0.0f);
+	m_ppObjects[3]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 1.0f));
+	m_ppObjects[3]->SetRotationSpeed(40.6f);
+	m_ppObjects[3]->SetMovingDirection(XMFLOAT3(0.0f, 0.0f, 1.0f));
+	m_ppObjects[3]->SetMovingSpeed(20.4f);
+
+	m_ppObjects[4] = new CExplosiveObject();
+	m_ppObjects[4]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[4]->SetColor(RGB(128, 0, 255));
+	m_ppObjects[4]->SetPosition(10.0f, 0.0f, 0.0f);
+	m_ppObjects[4]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	m_ppObjects[4]->SetRotationSpeed(50.06f);
+	m_ppObjects[4]->SetMovingDirection(XMFLOAT3(0.0f, 1.0f, 1.0f));
+	m_ppObjects[4]->SetMovingSpeed(6.4f);
+
+	m_ppObjects[5] = new CExplosiveObject();
+	m_ppObjects[5]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[5]->SetColor(RGB(255, 0, 255));
+	m_ppObjects[5]->SetPosition(-10.0f, 0.0f, -10.0f);
+	m_ppObjects[5]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	m_ppObjects[5]->SetRotationSpeed(60.06f);
+	m_ppObjects[5]->SetMovingDirection(XMFLOAT3(1.0f, 0.0f, 1.0f));
+	m_ppObjects[5]->SetMovingSpeed(8.9f);
+
+	m_ppObjects[6] = new CExplosiveObject();
+	m_ppObjects[6]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[6]->SetColor(RGB(255, 0, 255));
+	m_ppObjects[6]->SetPosition(-10.0f, 10.0f, -10.0f);
+	m_ppObjects[6]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	m_ppObjects[6]->SetRotationSpeed(60.06f);
+	m_ppObjects[6]->SetMovingDirection(XMFLOAT3(1.0f, 1.0f, 1.0f));
+	m_ppObjects[6]->SetMovingSpeed(9.7f);
+
+	m_ppObjects[7] = new CExplosiveObject();
+	m_ppObjects[7]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[7]->SetColor(RGB(255, 0, 128));
+	m_ppObjects[7]->SetPosition(-10.0f, 10.0f, -20.0f);
+	m_ppObjects[7]->SetRotationAxis(XMFLOAT3(0.0f, 1.0f, 0.0f));
+	m_ppObjects[7]->SetRotationSpeed(70.06f);
+	m_ppObjects[7]->SetMovingDirection(XMFLOAT3(-1.0f, 1.0f, 1.0f));
+	m_ppObjects[7]->SetMovingSpeed(15.6f);
+
+	m_ppObjects[8] = new CExplosiveObject();
+	m_ppObjects[8]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[8]->SetColor(RGB(128, 0, 255));
+	m_ppObjects[8]->SetPosition(-15.0f, 10.0f, -30.0f);
+	m_ppObjects[8]->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	m_ppObjects[8]->SetRotationSpeed(90.06f);
+	m_ppObjects[8]->SetMovingDirection(XMFLOAT3(0.0f, 0.0f, -1.0f));
+	m_ppObjects[8]->SetMovingSpeed(15.0f);
+
+	m_ppObjects[9] = new CExplosiveObject();
+	m_ppObjects[9]->SetMesh(pObjectCubeMesh);
+	m_ppObjects[9]->SetColor(RGB(255, 64, 64));
+	m_ppObjects[9]->SetPosition(+15.0f, 10.0f, 0.0f);
+	m_ppObjects[9]->SetRotationAxis(XMFLOAT3(1.0f, 1.0f, 0.0f));
+	m_ppObjects[9]->SetRotationSpeed(90.06f);
+	m_ppObjects[9]->SetMovingDirection(XMFLOAT3(-0.0f, 0.0f, -1.0f));
+	m_ppObjects[9]->SetMovingSpeed(15.0f);
+
+	for (int i = 0; i < 10; i++)
+		m_ppParticles[i] = new CParticleSystem();
 }
 
 void CScene::ReleaseObjects()
 {
+	if (CExplosiveObject::m_pExplosionMesh) CExplosiveObject::m_pExplosionMesh->Release();
 
 	for (int i = 0; i < m_nObjects; i++) if (m_ppObjects[i]) delete m_ppObjects[i];
+	for (int i = 0; i < 10; i++) delete m_ppParticles[i];
 	if (m_ppObjects) delete[] m_ppObjects;
 
 	if (m_pWallsObject) delete m_pWallsObject;
@@ -183,28 +295,52 @@ void CScene::CheckPlayerByWallCollision()
 
 void CScene::CheckObjectByBulletCollisions()
 {
+	CBulletObject** ppBullets = ((CTankPlayer*)m_pPlayer)->m_ppBullets;
+
+	for (int j = 0; j < BULLETS; j++)
+	{
+		// 💡 1️⃣ 바닥 폭발 검사 (Bullet이 플래그를 켰으면 폭발)
+		if (ppBullets[j]->m_bHitSurface)
+		{
+			SpawnParticle(ppBullets[j]->GetPosition());
+			ppBullets[j]->m_bHitSurface = false; // 소모 처리
+		}
+
+		if (!ppBullets[j]->m_bActive) continue;
+
+		// 💡 2️⃣ 몹(다른 오브젝트) 충돌 폭발 검사
+		for (int i = 0; i < m_nObjects; i++)
+		{
+			if (m_ppObjects[i]->m_xmOOBB.Intersects(ppBullets[j]->m_xmOOBB))
+			{
+				CExplosiveObject* pExplosiveObject = (CExplosiveObject*)m_ppObjects[i];
+				pExplosiveObject->m_bBlowingUp = true;
+
+				// 적에 맞았으므로 적 위치에서 화려한 파티클 스폰!
+				SpawnParticle(m_ppObjects[i]->GetPosition());
+
+				ppBullets[j]->m_bActive = false; // 총알 파괴
+				break; // 한 총알이 두 놈을 관통하지 않게 방어
+			}
+		}
+	}
 }
 
 void CScene::Animate(float fElapsedTime)
 {
-	// 벽이 있을 때만 벽 애니메이션 및 충돌 검사 실행
-	if (m_pWallsObject)
-	{
-		m_pWallsObject->Animate(fElapsedTime);
-		CheckPlayerByWallCollision();
-		CheckObjectByWallCollisions();
-	}
+	m_pWallsObject->Animate(fElapsedTime);
+	for (int i = 0; i < m_nObjects; i++) m_ppObjects[i]->Animate(fElapsedTime);
 
-	// 오브젝트들(우리의 탱크) 애니메이션
-	for (int i = 0; i < m_nObjects; i++)
-	{
-		if (m_ppObjects[i])
-			m_ppObjects[i]->Animate(fElapsedTime);
-	}
+	CheckPlayerByWallCollision();
 
-	// 탱크 한 대만 있으므로, 오브젝트 간 충돌이나 총알 충돌은 당분간 주석 처리하거나 냅둡니다.
-	// CheckObjectByObjectCollisions();
-	// CheckObjectByBulletCollisions();
+	CheckObjectByWallCollisions();
+
+	CheckObjectByObjectCollisions();
+
+	CheckObjectByBulletCollisions();
+
+	for (int i = 0; i < 10; i++)
+		if (m_ppParticles[i]->m_bActive) m_ppParticles[i]->Animate(fElapsedTime);
 }
 
 void CScene::Render(CCamera* pCamera)
@@ -213,12 +349,22 @@ void CScene::Render(CCamera* pCamera)
 		m_pWallsObject->Render(pCamera);
 
 	for (int i = 0; i < m_nObjects; i++)
-	{
-		if (m_ppObjects[i])
-			m_ppObjects[i]->Render(pCamera);
-	}
+		m_ppObjects[i]->Render(pCamera);
 
 	if (m_pPlayer)
 		m_pPlayer->Render(pCamera);
-}
 
+	for (int i = 0; i < 10; i++)
+		m_ppParticles[i]->Render(pCamera);
+}	
+
+void CScene::SpawnParticle(XMFLOAT3 pos)
+{
+	// 놀고 있는(꺼져있는) 파티클 찾아서 그 자리에서 빵!
+	for (int i = 0; i < 10; i++) {
+		if (!m_ppParticles[i]->m_bActive) {
+			m_ppParticles[i]->Spawn(pos);
+			break;
+		}
+	}
+}
