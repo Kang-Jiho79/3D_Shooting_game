@@ -1,12 +1,10 @@
 ﻿#include "StdAfx.h"
 #include "GameObject.h"
+#include "BehaviorTree.h"
+#include "Player.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-inline float RandF(float fMin, float fMax)
-{
-	return(fMin + ((float)rand() / (float)RAND_MAX) * (fMax - fMin));
-}
 
 XMVECTOR RandomUnitVectorOnSphere()
 {
@@ -204,6 +202,15 @@ CWallsObject::~CWallsObject()
 {
 }
 
+void CWallsObject::Render(CCamera* pCamera)
+{
+	if (m_pMesh)
+	{
+		// IsInFrustum 검사를 생략하고 무조건 Render 호출
+		m_pMesh->Render(m_xmf4x4World, m_dwColor, pCamera);
+	}
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 XMFLOAT3 CExplosiveObject::m_pxmf3SphereVectors[EXPLOSION_DEBRISES];
@@ -394,3 +401,254 @@ void CParticleSystem::Render(CCamera* pCamera)
 		m_pMesh->Render(matWorld, m_dwColors[i], pCamera);
 	}
 }
+
+
+// ==============================================================================
+// CTankEnemy 구현
+// ==============================================================================
+CTankEnemy::CTankEnemy()
+{
+	SetMesh(NULL); // 본체는 투명한 기준축
+
+	// 1. 하체(Body)
+	m_pBody = new CGameObject();
+	m_pBody->SetMesh(new CCubeMesh(6.0f, 2.0f, 10.0f));
+	m_pBody->SetColor(RGB(150, 0, 0)); // 어두운 빨간색
+
+	// 2. 상체(Turret)
+	m_pTurret = new CGameObject();
+	m_pTurret->SetMesh(new CCubeMesh(4.0f, 2.0f, 4.0f));
+	m_pTurret->SetColor(RGB(255, 50, 50)); // 밝은 빨간색
+
+	// 3. 포신(Gun)
+	m_pGun = new CGameObject();
+	m_pGun->SetMesh(new CCubeMesh(0.5f, 0.5f, 6.0f));
+	m_pGun->SetColor(RGB(64, 64, 64)); // 회색
+
+	for (int i = 0; i < ENEMY_BULLETS; i++)
+	{
+		m_ppBullets[i] = new CBulletObject(200.0f);
+		m_ppBullets[i]->SetMesh(new CCubeMesh(0.5f, 0.5f, 1.0f));
+		m_ppBullets[i]->SetColor(RGB(255, 0, 0)); // 빨간 총알
+		m_ppBullets[i]->SetMovingSpeed(15.0f);
+		m_ppBullets[i]->SetActive(false);
+	}
+}
+
+CTankEnemy::~CTankEnemy()
+{
+	if (m_pBody) delete m_pBody;
+	if (m_pTurret) delete m_pTurret;
+	if (m_pGun) delete m_pGun;
+	for (int i = 0; i < ENEMY_BULLETS; i++) if (m_ppBullets[i]) delete m_ppBullets[i];
+}
+
+void CTankEnemy::OnUpdateTransform()
+{
+	// 1. 하체 행렬 (기준축 회전)
+	XMFLOAT4X4 xmtxBodyRot = Matrix4x4::RotationYawPitchRoll(0.0f, m_fBodyYaw, 0.0f);
+	XMFLOAT4X4 xmtxTrans = Matrix4x4::Translate(m_xmf4x4World._41, m_xmf4x4World._42, m_xmf4x4World._43);
+	if (m_pBody) m_pBody->m_xmf4x4World = Matrix4x4::Multiply(xmtxBodyRot, xmtxTrans);
+
+	// 2. 상체 행렬 (하체 위치에서 독립적인 포탑 회전 + Y축 오프셋)
+	XMFLOAT4X4 xmtxTurretRot = Matrix4x4::RotationYawPitchRoll(0.0f, m_fTurretYaw, 0.0f);
+	XMFLOAT4X4 xmtxTurretTrans = Matrix4x4::Translate(0.0f, 2.0f, 0.0f);
+	XMFLOAT4X4 xmtxTurretLocal = Matrix4x4::Multiply(xmtxTurretRot, xmtxTurretTrans);
+	if (m_pTurret && m_pBody) m_pTurret->m_xmf4x4World = Matrix4x4::Multiply(xmtxTurretLocal, m_pBody->m_xmf4x4World);
+
+	// 3. 포신 행렬
+	XMFLOAT4X4 xmtxGunRot = Matrix4x4::RotationYawPitchRoll(m_fGunPitch, 0.0f, 0.0f);
+	XMFLOAT4X4 xmtxGunTrans = Matrix4x4::Translate(0.0f, 0.0f, 3.0f);
+	XMFLOAT4X4 xmtxGunLocal = Matrix4x4::Multiply(xmtxGunRot, xmtxGunTrans);
+	if (m_pGun && m_pTurret) m_pGun->m_xmf4x4World = Matrix4x4::Multiply(xmtxGunLocal, m_pTurret->m_xmf4x4World);
+
+	// 바운딩 박스 갱신 (전체 충돌 영역)
+	m_xmOOBB = m_pBody->m_xmOOBB;
+}
+
+void CTankEnemy::Animate(float fElapsedTime)
+{
+	// 💡 매 프레임마다 공격 쿨타임을 감소
+	if (m_fFireCooldownTimer > 0.0f)
+	{
+		m_fFireCooldownTimer -= fElapsedTime;
+	}
+
+	if (m_bActive && m_BTRoot)
+	{
+		m_BTRoot->Evaluate(); // 💡 여기서 매 프레임 AI 판단이 일어납니다!
+	}
+
+	CGameObject::Animate(fElapsedTime);
+	OnUpdateTransform(); // 계층 구조 행렬 업데이트
+
+	if (m_pBody) m_pBody->Animate(fElapsedTime);
+	if (m_pTurret) m_pTurret->Animate(fElapsedTime);
+	if (m_pGun) m_pGun->Animate(fElapsedTime);
+
+	for (int i = 0; i < ENEMY_BULLETS; i++)
+		if (m_ppBullets[i]->m_bActive) m_ppBullets[i]->Animate(fElapsedTime);
+}
+
+void CTankEnemy::Render(CCamera* pCamera)
+{
+	if (m_pBody) m_pBody->Render(pCamera);
+	if (m_pTurret) m_pTurret->Render(pCamera);
+	if (m_pGun) m_pGun->Render(pCamera);
+
+	for (int i = 0; i < ENEMY_BULLETS; i++)
+		if (m_ppBullets[i]->m_bActive) m_ppBullets[i]->Render(pCamera);
+}
+
+void CTankEnemy::RotateBody(float fAngle) { m_fBodyYaw += fAngle; }
+void CTankEnemy::RotateTurret(float fAngle) { m_fTurretYaw += fAngle; }
+void CTankEnemy::MoveBody(float fDistance)
+{
+	XMFLOAT3 xmf3BodyLook = XMFLOAT3(sinf(XMConvertToRadians(m_fBodyYaw)), 0.0f, cosf(XMConvertToRadians(m_fBodyYaw)));
+	XMFLOAT3 xmf3Shift = Vector3::ScalarProduct(Vector3::Normalize(xmf3BodyLook), fDistance);
+	Move(xmf3Shift, 1.0f);
+}
+
+void CTankEnemy::FireBullet()
+{
+	// 💡 쿨타임이 0보다 크면(아직 돌고 있으면) 총알을 발사하지 않고 함수 종료
+	if (m_fFireCooldownTimer > 0.0f) return;
+
+	OnUpdateTransform();
+	CBulletObject* pBullet = nullptr;
+	for (int i = 0; i < ENEMY_BULLETS; i++)
+	{
+		if (!m_ppBullets[i]->m_bActive) { pBullet = m_ppBullets[i]; break; }
+	}
+	
+	if (pBullet && m_pGun)
+	{
+		XMFLOAT3 xmf3GunPos = m_pGun->GetPosition();
+		XMFLOAT3 xmf3GunDir = m_pGun->GetLook();
+		XMFLOAT3 xmf3FirePos = Vector3::Add(xmf3GunPos, Vector3::ScalarProduct(xmf3GunDir, 4.0f));
+
+		pBullet->m_xmf4x4World = m_pGun->m_xmf4x4World; // 회전값 복사
+		pBullet->SetFirePosition(xmf3FirePos);
+		pBullet->SetMovingDirection(xmf3GunDir);
+		pBullet->SetActive(true);
+
+		// 💡 한 발 발사 후 1.5초(원하는 초만큼 설정) 동안 쿨타임 세팅
+		m_fFireCooldownTimer = 1.5f; 
+	}
+}
+
+// ==========================================
+// AI 탱크용 BT 커스텀 노드들
+// ==========================================
+
+// 1. 조건: 거리가 X 이내인가?
+class CheckDistanceNode : public BTNode {
+	CTankEnemy* tank; float range;
+public:
+	CheckDistanceNode(CTankEnemy* t, float r) : tank(t), range(r) {}
+	virtual BTState Evaluate() override {
+		if (!tank->m_pTargetPlayer) return BTState::FAILURE;
+		float dist = Vector3::Distance(tank->GetPosition(), tank->m_pTargetPlayer->GetPosition());
+		return (dist <= range) ? BTState::SUCCESS : BTState::FAILURE;
+	}
+};
+
+// 2. 조건: 포탑이 플레이어를 정조준(일치) 중인가?
+class CheckAimNode : public BTNode {
+	CTankEnemy* tank; float epsilon;
+public:
+	CheckAimNode(CTankEnemy* t, float e) : tank(t), epsilon(e) {}
+	virtual BTState Evaluate() override {
+		if (!tank->m_pTargetPlayer || !tank->m_pGun) return BTState::FAILURE;
+		XMFLOAT3 dirToPlayer = Vector3::Normalize(Vector3::Subtract(tank->m_pTargetPlayer->GetPosition(), tank->GetPosition()));
+		float dot = Vector3::DotProduct(tank->m_pGun->GetLook(), dirToPlayer);
+		return (dot > epsilon) ? BTState::SUCCESS : BTState::FAILURE; // 허용 오차 내 정조준
+	}
+};
+
+// 3. 행동: 공격 (Fire)
+class ActionFireNode : public BTNode {
+	CTankEnemy* tank;
+public:
+	ActionFireNode(CTankEnemy* t) : tank(t) {}
+	virtual BTState Evaluate() override {
+		tank->FireBullet();
+		return BTState::SUCCESS;
+	}
+};
+
+// 4. 행동: 포탑을 플레이어 방향으로 회전
+class ActionAimNode : public BTNode {
+	CTankEnemy* tank; float fTimeElapsed;
+public:
+	ActionAimNode(CTankEnemy* t, float dt) : tank(t), fTimeElapsed(dt) {}
+	virtual BTState Evaluate() override {
+		if (!tank->m_pTargetPlayer || !tank->m_pGun) return BTState::FAILURE;
+
+		// 💡 단순 목표 각도 계산 후 천천히 돌림
+		XMFLOAT3 dirToPlayer = Vector3::Normalize(Vector3::Subtract(tank->m_pTargetPlayer->GetPosition(), tank->GetPosition()));
+		XMFLOAT3 curLook = tank->m_pGun->GetLook();
+
+		// 내적/외적을 써서 좌/우 중 어느 방향으로 돌릴지 결정
+		XMFLOAT3 cross = Vector3::CrossProduct(curLook, dirToPlayer);
+		if (cross.y > 0) tank->RotateTurret(90.0f * 0.016f); // 좌회전
+		else tank->RotateTurret(-90.0f * 0.016f); // 우회전
+
+		return BTState::RUNNING; // 아직 도는 중
+	}
+};
+
+// 5. 행동: 무작위 방향으로 방황 이동
+class ActionWanderNode : public BTNode {
+	CTankEnemy* tank; float fTimeElapsed;
+public:
+	ActionWanderNode(CTankEnemy* t, float dt) : tank(t), fTimeElapsed(dt) {}
+	virtual BTState Evaluate() override {
+		tank->m_fWanderTimer -= fTimeElapsed;
+		if (tank->m_fWanderTimer <= 0.0f) {
+			tank->m_fWanderYaw = RandF(0.0f, 360.0f); // 3초마다 랜덤 각도
+			tank->m_fWanderTimer = 3.0f;
+		}
+
+		// 목표 각도로 서서히 몸체 돌리며 직진 (단순화: 일단 해당 각도로 즉시 설정)
+		tank->m_fBodyYaw = tank->m_fWanderYaw;
+		tank->MoveBody(5.0f * fTimeElapsed); // 천천히 이동
+
+		return BTState::RUNNING;
+	}
+};
+
+
+// ===============================================
+// 두뇌 조립 함수 및 업데이트 호출부
+// ===============================================
+void CTankEnemy::InitializeAI(CPlayer* pPlayer)
+{
+	m_pTargetPlayer = pPlayer;
+	m_fWanderTimer = 0.0f;
+
+	// 트리 생성
+	auto rootSelector = std::make_shared<BTSelector>();
+
+	// (1) 조준 상태면 사격
+	auto seqFire = std::make_shared<BTSequence>();
+	seqFire->AddChild(std::make_shared<CheckDistanceNode>(this, 30.0f)); // 20 내부
+	seqFire->AddChild(std::make_shared<CheckAimNode>(this, 0.98f)); // 거진 일치 (1.0 = 완벽)
+	seqFire->AddChild(std::make_shared<ActionFireNode>(this));
+
+	// (2) 사정거리 안으로 들어오면 조준 시도 (포탑 회전)
+	auto seqAim = std::make_shared<BTSequence>();
+	seqAim->AddChild(std::make_shared<CheckDistanceNode>(this, 30.0f));
+	seqAim->AddChild(std::make_shared<ActionAimNode>(this, 0.016f));
+
+	// (3) 그 외에는 방황
+	auto actWander = std::make_shared<ActionWanderNode>(this, 0.016f);
+
+	// 트리 연결 (우선순위 순서대로 추가)
+	rootSelector->AddChild(seqFire);
+	rootSelector->AddChild(seqAim);
+	rootSelector->AddChild(actWander);
+
+	m_BTRoot = rootSelector;
+}
+

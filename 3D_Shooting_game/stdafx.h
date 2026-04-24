@@ -50,17 +50,18 @@ using namespace DirectX::PackedVector;
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "winmm.lib")
 
-#define CLIENT_WIDTH			640
-#define CLIENT_HEIGHT			480
+#define CLIENT_WIDTH			800
+#define CLIENT_HEIGHT			800
 
-#define DIR_FORWARD				0x01
+#define DIR_FORWARD			0x01
 #define DIR_BACKWARD			0x02
 #define DIR_LEFT				0x04
 #define DIR_RIGHT				0x08
-#define DIR_UP					0x10
+#define DIR_UP				0x10
 #define DIR_DOWN				0x20
 
 #define RANDOM_COLOR			(0xFF000000 | ((rand() * 0xFFFFFF) / RAND_MAX))
+#define RandF(fMin, fMax) ((fMin) + ((float)rand() / (float)RAND_MAX) * ((fMax) - (fMin)))
 
 #define EXPLOSION_DEBRISES		100
 
@@ -75,6 +76,7 @@ extern float* g_pDepthBuffer;
 
 inline bool IsZero(float fValue) { return((fabsf(fValue) < EPSILON)); }
 inline bool IsEqual(float fA, float fB) { return(::IsZero(fA - fB)); }
+
 
 namespace Vector3
 {

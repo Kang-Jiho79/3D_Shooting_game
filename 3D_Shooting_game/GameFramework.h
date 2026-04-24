@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "KeyMgr.h"
+#include "SceneMgr.h"
 
 class CGameFramework
 {
@@ -32,11 +33,8 @@ private:
 	HDC						m_hDCFrameBuffer = NULL;
     HBITMAP					m_hBitmapFrameBuffer = NULL;
 
-	CPlayer					*m_pPlayer = NULL;
-	CScene					*m_pScene = NULL;
-	CGameObject				*m_pSelectedObject = NULL;
-
 	KeyMgr					m_KeyMgr;
+	CSceneMgr					*m_pSceneMgr;
 
 public:
 	void BuildFrameBuffer();

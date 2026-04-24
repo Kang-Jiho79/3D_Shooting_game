@@ -2,6 +2,7 @@
 
 #include "Mesh.h"
 #include "Camera.h"
+#include "BehaviorTree.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -24,11 +25,11 @@ public:
 
 	DWORD						m_dwColor;
 
-	XMFLOAT3					m_xmf3MovingDirection;
+	XMFLOAT3						m_xmf3MovingDirection;
 	float						m_fMovingSpeed;
 	float						m_fMovingRange;
 
-	XMFLOAT3					m_xmf3RotationAxis;
+	XMFLOAT3						m_xmf3RotationAxis;
 	float						m_fRotationSpeed;
 
 public:
@@ -102,9 +103,11 @@ public:
 	CWallsObject();
 	virtual ~CWallsObject();
 
+	virtual void Render(CCamera* pCamera) override;
+
 public:
 	BoundingOrientedBox			m_xmOOBBPlayerMoveCheck;
-	XMFLOAT4					m_pxmf4WallPlanes[6];
+	XMFLOAT4						m_pxmf4WallPlanes[6];
 };
 
 class CBulletObject : public CGameObject
@@ -145,3 +148,42 @@ public:
 	virtual void Render(CCamera* pCamera);
 };
 
+#define ENEMY_BULLETS 10
+
+// -----------------------------------------------------------------------------
+// 적 탱크 객체
+// -----------------------------------------------------------------------------
+class CPlayer;
+class CTankEnemy : public CGameObject
+{
+public:
+	CTankEnemy();
+	virtual ~CTankEnemy();
+
+	CGameObject* m_pBody = NULL;
+	CGameObject* m_pTurret = NULL;
+	CGameObject* m_pGun = NULL;
+
+	CBulletObject* m_ppBullets[ENEMY_BULLETS];
+	CPlayer* m_pTargetPlayer = NULL; 
+	std::shared_ptr<BTNode> m_BTRoot = nullptr;
+
+	float m_fWanderTimer = 0.0f; 
+	float m_fWanderYaw = 0.0f;   
+	float m_fFireCooldownTimer = 0.0f; // 💡 무한 공격을 막기 위한 쿨타임 타이머 추가
+
+	float m_fBodyYaw = 0.0f;
+	float m_fTurretYaw = 0.0f;
+	float m_fGunPitch = 0.0f;
+
+	void InitializeAI(CPlayer* pPlayer);
+	virtual void Animate(float fElapsedTime) override;
+	virtual void Render(CCamera* pCamera) override;
+
+	void OnUpdateTransform();
+
+	void MoveBody(float fDistance);
+	void RotateBody(float fAngle);
+	void RotateTurret(float fAngle);
+	void FireBullet();
+};

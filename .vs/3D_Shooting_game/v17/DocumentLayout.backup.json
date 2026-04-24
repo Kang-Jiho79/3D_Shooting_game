@@ -1,94 +1,118 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\",
+  "WorkspaceRootPath": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GameFramework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GraphicsPipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\KeyMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\KeyMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\3D_Shooting_game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Timer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Timer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\KeyMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\KeyMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GraphicsPipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\3D_Shooting_game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\targetver.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\targetver.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Resource.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Resource.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\3D_Shooting_game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GameFramework.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GraphicsPipeline.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\GameFramework.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\SceneMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\SceneMgr.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\stdafx.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\BehaviorTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\BehaviorTree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Timer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Timer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\BehavoirTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\BehavoirTree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\SceneMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\SceneMgr.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Resource.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Resource.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\3D_Shooting_game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\Timer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\targetver.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B5CB2127-EE99-4F32-B879-85B52F7EB5C3}|3D_Shooting_game\\3D_Shooting_game.vcxproj|solutionrelative:3D_Shooting_game\\targetver.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,172 +122,99 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Scene.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Scene.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Scene.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Scene.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\Scene.cpp",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAAAMwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:31:26.805Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "3D_Shooting_game.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\3D_Shooting_game.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.h",
-              "RelativeToolTip": "3D_Shooting_game\\3D_Shooting_game.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:27:52.239Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "Camera.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Camera.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Camera.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Camera.h",
-              "RelativeToolTip": "3D_Shooting_game\\Camera.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:31:35.13Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameFramework.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\GameFramework.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\GameFramework.cpp",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAGIAAAAIAAAAAAAAAA==",
+              "Title": "GameObject.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameObject.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\GameObject.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameObject.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\GameObject.cpp",
+              "ViewState": "AgIAALcAAAAAAAAAAAAAAM8AAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:26:20.386Z",
+              "WhenOpened": "2026-04-17T05:31:14.378Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Player.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Player.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Player.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Player.h",
-              "RelativeToolTip": "3D_Shooting_game\\Player.h",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:56:32.604Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Mesh.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Mesh.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Mesh.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Mesh.h",
-              "RelativeToolTip": "3D_Shooting_game\\Mesh.h",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:31:50.976Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Mesh.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Mesh.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Mesh.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Mesh.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\Mesh.cpp",
-              "ViewState": "AgIAALABAAAAAAAAAAAAAM4BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:31:24.016Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GameObject.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameObject.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\GameObject.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameObject.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\GameObject.cpp",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAAADoBAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:31:14.378Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GraphicsPipeline.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\GraphicsPipeline.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\GraphicsPipeline.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:31:20.357Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Player.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Player.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Player.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Player.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\Player.cpp",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAAAK4AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:31:25.922Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Scene.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Scene.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Scene.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Scene.h",
-              "RelativeToolTip": "3D_Shooting_game\\Scene.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:56:51.648Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "GameObject.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameObject.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\GameObject.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameObject.h",
-              "RelativeToolTip": "3D_Shooting_game\\GameObject.h",
-              "ViewState": "AgIAAD4AAAAAAAAAAADwv1cAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:31:43.42Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Timer.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Timer.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Timer.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Timer.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\Timer.cpp",
+              "Title": "KeyMgr.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\KeyMgr.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\KeyMgr.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\KeyMgr.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\KeyMgr.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:31:30.379Z"
+              "WhenOpened": "2026-04-18T17:06:55.757Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 0,
+              "Title": "Mesh.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Mesh.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Mesh.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Mesh.cpp*",
+              "RelativeToolTip": "3D_Shooting_game\\Mesh.cpp*",
+              "ViewState": "AgIAAAcBAAAAAAAAAAAiwDkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:31:24.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Camera.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Camera.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Camera.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Camera.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\Camera.cpp",
+              "ViewState": "AgIAADIAAAAAAAAAAAASwFQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:30:12.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GameFramework.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\GameFramework.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.h",
+              "RelativeToolTip": "3D_Shooting_game\\GameFramework.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:31:41.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SceneMgr.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\SceneMgr.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\SceneMgr.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\SceneMgr.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\SceneMgr.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-18T16:45:50.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "stdafx.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\stdafx.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\stdafx.cpp",
               "RelativeDocumentMoniker": "3D_Shooting_game\\stdafx.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\stdafx.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\stdafx.cpp",
               "RelativeToolTip": "3D_Shooting_game\\stdafx.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -271,71 +222,221 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Camera.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Camera.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Camera.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Camera.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\Camera.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAATAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Player.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Player.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Player.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\Player.cpp",
+              "ViewState": "AgIAAJUAAAAAAAAAAAASwK0AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:30:12.932Z"
+              "WhenOpened": "2026-04-17T05:31:25.922Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "3D_Shooting_game.cpp",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.cpp",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\3D_Shooting_game.cpp",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.cpp",
-              "RelativeToolTip": "3D_Shooting_game\\3D_Shooting_game.cpp",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-17T05:23:33.633Z"
+              "DocumentIndex": 4,
+              "Title": "GameObject.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameObject.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\GameObject.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameObject.h",
+              "RelativeToolTip": "3D_Shooting_game\\GameObject.h",
+              "ViewState": "AgIAADIAAAAAAAAAAAASwGkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:31:43.42Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Timer.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Timer.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\Timer.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Timer.h",
-              "RelativeToolTip": "3D_Shooting_game\\Timer.h",
+              "DocumentIndex": 7,
+              "Title": "Scene.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Scene.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Scene.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Scene.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\Scene.cpp",
+              "ViewState": "AgIAAEUAAAAAAAAAAAASwFkAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:31:26.805Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GraphicsPipeline.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\GraphicsPipeline.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\GraphicsPipeline.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACkAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:31:20.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "KeyMgr.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\KeyMgr.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\KeyMgr.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\KeyMgr.h",
+              "RelativeToolTip": "3D_Shooting_game\\KeyMgr.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:56:54.971Z"
+              "WhenOpened": "2026-04-18T16:44:17.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Mesh.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Mesh.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Mesh.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Mesh.h",
+              "RelativeToolTip": "3D_Shooting_game\\Mesh.h",
+              "ViewState": "AgIAAB0AAAAAAAAAAAASwDUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:31:50.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Scene.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Scene.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Scene.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Scene.h",
+              "RelativeToolTip": "3D_Shooting_game\\Scene.h",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAAAEQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:56:51.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GameFramework.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\GameFramework.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\GameFramework.cpp",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAAAIEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:26:20.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GraphicsPipeline.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\GraphicsPipeline.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.h",
+              "RelativeToolTip": "3D_Shooting_game\\GraphicsPipeline.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:31:49.615Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
+              "Title": "BehaviorTree.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\BehaviorTree.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\BehaviorTree.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\BehaviorTree.h",
+              "RelativeToolTip": "3D_Shooting_game\\BehaviorTree.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-19T02:23:14.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "stdafx.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\stdafx.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\stdafx.h",
               "RelativeDocumentMoniker": "3D_Shooting_game\\stdafx.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\stdafx.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\stdafx.h",
               "RelativeToolTip": "3D_Shooting_game\\stdafx.h",
-              "ViewState": "AgIAAKUAAAAAAAAAAADgv7sAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADUAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-04-17T05:27:54.233Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "targetver.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\targetver.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\targetver.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\targetver.h",
-              "RelativeToolTip": "3D_Shooting_game\\targetver.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 19,
+              "Title": "Camera.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Camera.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Camera.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Camera.h",
+              "RelativeToolTip": "3D_Shooting_game\\Camera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:28:05.126Z"
+              "WhenOpened": "2026-04-17T05:31:35.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 12,
+              "Title": "3D_Shooting_game.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\3D_Shooting_game.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.h",
+              "RelativeToolTip": "3D_Shooting_game\\3D_Shooting_game.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:27:52.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Timer.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Timer.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Timer.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Timer.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\Timer.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:31:30.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "BehavoirTree.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\BehavoirTree.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\BehavoirTree.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\BehavoirTree.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\BehavoirTree.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-19T02:34:25.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "SceneMgr.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\SceneMgr.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\SceneMgr.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\SceneMgr.h",
+              "RelativeToolTip": "3D_Shooting_game\\SceneMgr.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-18T15:18:35.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Player.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Player.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Player.h",
+              "RelativeToolTip": "3D_Shooting_game\\Player.h",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:56:32.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "Resource.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Resource.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Resource.h",
               "RelativeDocumentMoniker": "3D_Shooting_game\\Resource.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\Resource.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Resource.h",
               "RelativeToolTip": "3D_Shooting_game\\Resource.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -343,27 +444,49 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "GraphicsPipeline.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\GraphicsPipeline.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GraphicsPipeline.h",
-              "RelativeToolTip": "3D_Shooting_game\\GraphicsPipeline.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:31:49.615Z"
+              "DocumentIndex": 25,
+              "Title": "3D_Shooting_game.cpp",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.cpp",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\3D_Shooting_game.cpp",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\3D_Shooting_game.cpp",
+              "RelativeToolTip": "3D_Shooting_game\\3D_Shooting_game.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-17T05:23:33.633Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "GameFramework.h",
-              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.h",
-              "RelativeDocumentMoniker": "3D_Shooting_game\\GameFramework.h",
-              "ToolTip": "C:\\Users\\giho2\\Documents\\Github\\3D_Shooting_game\\3D_Shooting_game\\GameFramework.h",
-              "RelativeToolTip": "3D_Shooting_game\\GameFramework.h",
+              "DocumentIndex": 26,
+              "Title": "Timer.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Timer.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\Timer.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\Timer.h",
+              "RelativeToolTip": "3D_Shooting_game\\Timer.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-17T05:31:41.095Z"
+              "WhenOpened": "2026-04-17T05:56:54.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "targetver.h",
+              "DocumentMoniker": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\targetver.h",
+              "RelativeDocumentMoniker": "3D_Shooting_game\\targetver.h",
+              "ToolTip": "C:\\Users\\giho2\\Documents\\GitHub\\3D_Shooting_game\\3D_Shooting_game\\targetver.h",
+              "RelativeToolTip": "3D_Shooting_game\\targetver.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-17T05:28:05.126Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 155,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             }
           ]
         }

@@ -6,6 +6,10 @@
 //
 CPolygon::CPolygon(int nVertices)
 {
+	// 💡 초기화 추가
+	m_bHasColor = false;
+	m_dwColor = 0;
+
 	if (nVertices > 0)
 	{
 		m_nVertices = nVertices;
@@ -71,14 +75,12 @@ void CMesh::Render(XMFLOAT4X4& xmf4x4World, DWORD dwColor, CCamera* pCamera)
 		{
 			XMFLOAT3 xmf3Current = Vector3::TransformCoord(pVertices[i].m_xmf3Position, xmf4x4Transform);
 
-			// 카메라 절두체(Z값 기준) 앞뒤 컷 로직 보존
-			if ((xmf3Current.z >= 0.0f) && (xmf3Current.z <= 1.0f))
+			if ((xmf3Current.z >= -0.0f) && (xmf3Current.z <= 1.0f))
 			{
-				// Screen 거치면서 Z값 버리지 않고 보존!
 				xmf3Current.x = +xmf3Current.x * (pCamera->m_d3dViewport.Width * 0.5f) + pCamera->m_d3dViewport.TopLeftX + (pCamera->m_d3dViewport.Width * 0.5f);
 				xmf3Current.y = -xmf3Current.y * (pCamera->m_d3dViewport.Height * 0.5f) + pCamera->m_d3dViewport.TopLeftY + (pCamera->m_d3dViewport.Height * 0.5f);
 
-				projVertices[i] = xmf3Current; // (X, Y 픽셀좌표 / Z 거리값 소유)
+				projVertices[i] = xmf3Current; 
 			}
 			else {
 				bVisible = false; break;
@@ -87,26 +89,24 @@ void CMesh::Render(XMFLOAT4X4& xmf4x4World, DWORD dwColor, CCamera* pCamera)
 
 		if (bVisible)
 		{
-			// 💡 백페이스 컬링 (Backface Culling)
-			// 화면에 투영된 3개의 정점을 이용해 2D 외적(Cross Product) 면적을 구합니다.
 			float cx = projVertices[1].x - projVertices[0].x;
 			float cy = projVertices[1].y - projVertices[0].y;
 			float bx = projVertices[2].x - projVertices[0].x;
 			float by = projVertices[2].y - projVertices[0].y;
 
-			// 시계방향(CW) 정점 배열 + GDI의 Top-Down(Y축 하단) 좌표계 기준으로
-			// 외적 값이 0 미만(음수)인 면만 카메라를 바라보고 있는 앞면(Front Face)입니다.
 			float fCrossZ = (cx * by) - (cy * bx);
 
-			// 💡 카메라를 등지고 있는 면(양수)이면 과감하게 스킵(Culling)합니다!
 			if (fCrossZ > 0.0f)
 			{
+				// 💡 폴리곤 고유 색상이 켜져 있다면 해당 색상을 적용, 아니면 기본 전달받은 색상 적용
+				DWORD dwRenderColor = m_ppPolygons[j]->m_bHasColor ? m_ppPolygons[j]->m_dwColor : dwColor;
+
 				if (nVertices == 3) {
-					GraphicsPipeline::DrawTriangle(projVertices[0], projVertices[1], projVertices[2], dwColor);
+					GraphicsPipeline::DrawTriangle(projVertices[0], projVertices[1], projVertices[2], dwRenderColor);
 				}
 				else if (nVertices == 4) {
-					GraphicsPipeline::DrawTriangle(projVertices[0], projVertices[1], projVertices[2], dwColor);
-					GraphicsPipeline::DrawTriangle(projVertices[0], projVertices[2], projVertices[3], dwColor);
+					GraphicsPipeline::DrawTriangle(projVertices[0], projVertices[1], projVertices[2], dwRenderColor);
+					GraphicsPipeline::DrawTriangle(projVertices[0], projVertices[2], projVertices[3], dwRenderColor);
 				}
 			}
 		}
@@ -219,24 +219,26 @@ CCubeMesh::~CCubeMesh(void)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-CWallMesh::CWallMesh(float fWidth, float fHeight, float fDepth, int nSubRects) : CMesh((3 * nSubRects * nSubRects) + 2)
+CWallMesh::CWallMesh(float fWidth, float fHeight, float fDepth, int nSubRects)
+// 💡 5개의 면(좌, 우, 바닥, 앞, 뒤)을 각각 nSubRects * nSubRects 개로 쪼개므로 (5 * nSubRects * nSubRects) 만큼 할당 
+	: CMesh(5 * nSubRects * nSubRects)
 {
 	float fHalfWidth = fWidth * 0.5f;
 	float fHalfHeight = fHeight * 0.5f;
 	float fHalfDepth = fDepth * 0.5f;
+
 	float fCellWidth = fWidth * (1.0f / nSubRects);
 	float fCellHeight = fHeight * (1.0f / nSubRects);
 	float fCellDepth = fDepth * (1.0f / nSubRects);
 
 	int k = 0;
 
-	// 1. 왼쪽 벽
-	CPolygon* pLeftFace;
+	// 1. 왼쪽 벽 (Left Face)
 	for (int i = 0; i < nSubRects; i++)
 	{
 		for (int j = 0; j < nSubRects; j++)
 		{
-			pLeftFace = new CPolygon(4);
+			CPolygon* pLeftFace = new CPolygon(4);
 			pLeftFace->SetVertex(0, CVertex(-fHalfWidth, -fHalfHeight + (i * fCellHeight), -fHalfDepth + (j * fCellDepth)));
 			pLeftFace->SetVertex(1, CVertex(-fHalfWidth, -fHalfHeight + ((i + 1) * fCellHeight), -fHalfDepth + (j * fCellDepth)));
 			pLeftFace->SetVertex(2, CVertex(-fHalfWidth, -fHalfHeight + ((i + 1) * fCellHeight), -fHalfDepth + ((j + 1) * fCellDepth)));
@@ -245,13 +247,12 @@ CWallMesh::CWallMesh(float fWidth, float fHeight, float fDepth, int nSubRects) :
 		}
 	}
 
-	// 2. 오른쪽 벽
-	CPolygon* pRightFace;
+	// 2. 오른쪽 벽 (Right Face)
 	for (int i = 0; i < nSubRects; i++)
 	{
 		for (int j = 0; j < nSubRects; j++)
 		{
-			pRightFace = new CPolygon(4);
+			CPolygon* pRightFace = new CPolygon(4);
 			pRightFace->SetVertex(0, CVertex(+fHalfWidth, -fHalfHeight + (i * fCellHeight), -fHalfDepth + (j * fCellDepth)));
 			pRightFace->SetVertex(1, CVertex(+fHalfWidth, -fHalfHeight + (i * fCellHeight), -fHalfDepth + ((j + 1) * fCellDepth)));
 			pRightFace->SetVertex(2, CVertex(+fHalfWidth, -fHalfHeight + ((i + 1) * fCellHeight), -fHalfDepth + ((j + 1) * fCellDepth)));
@@ -261,36 +262,49 @@ CWallMesh::CWallMesh(float fWidth, float fHeight, float fDepth, int nSubRects) :
 	}
 
 	// 3. 바닥 (Bottom Face)
-	CPolygon* pBottomFace;
 	for (int i = 0; i < nSubRects; i++)
 	{
 		for (int j = 0; j < nSubRects; j++)
 		{
-			pBottomFace = new CPolygon(4);
+			CPolygon* pBottomFace = new CPolygon(4);
+			pBottomFace->m_bHasColor = true;
+			pBottomFace->m_dwColor = ((i + j) % 2 == 0) ? RGB(40, 90, 40) : RGB(50, 100, 50);
+
 			pBottomFace->SetVertex(0, CVertex(-fHalfWidth + (i * fCellWidth), -fHalfHeight, -fHalfDepth + (j * fCellDepth)));
 			pBottomFace->SetVertex(1, CVertex(-fHalfWidth + (i * fCellWidth), -fHalfHeight, -fHalfDepth + ((j + 1) * fCellDepth)));
 			pBottomFace->SetVertex(2, CVertex(-fHalfWidth + ((i + 1) * fCellWidth), -fHalfHeight, -fHalfDepth + ((j + 1) * fCellDepth)));
 			pBottomFace->SetVertex(3, CVertex(-fHalfWidth + ((i + 1) * fCellWidth), -fHalfHeight, -fHalfDepth + (j * fCellDepth)));
-
 			SetPolygon(k++, pBottomFace);
 		}
 	}
 
-	// 4. 앞쪽 벽 (Front Face, 분할 없이 1장)
-	CPolygon* pFrontFace = new CPolygon(4);
-	pFrontFace->SetVertex(0, CVertex(-fHalfWidth, +fHalfHeight, +fHalfDepth));
-	pFrontFace->SetVertex(1, CVertex(+fHalfWidth, +fHalfHeight, +fHalfDepth));
-	pFrontFace->SetVertex(2, CVertex(+fHalfWidth, -fHalfHeight, +fHalfDepth));
-	pFrontFace->SetVertex(3, CVertex(-fHalfWidth, -fHalfHeight, +fHalfDepth));
-	SetPolygon(k++, pFrontFace);
+	// 4. 앞쪽 벽 (Front Face) - 분할
+	for (int i = 0; i < nSubRects; i++)
+	{
+		for (int j = 0; j < nSubRects; j++)
+		{
+			CPolygon* pFrontFace = new CPolygon(4);
+			pFrontFace->SetVertex(0, CVertex(-fHalfWidth + (j * fCellWidth), -fHalfHeight + (i * fCellHeight), +fHalfDepth));
+			pFrontFace->SetVertex(1, CVertex(-fHalfWidth + (j * fCellWidth), -fHalfHeight + ((i + 1) * fCellHeight), +fHalfDepth));
+			pFrontFace->SetVertex(2, CVertex(-fHalfWidth + ((j + 1) * fCellWidth), -fHalfHeight + ((i + 1) * fCellHeight), +fHalfDepth));
+			pFrontFace->SetVertex(3, CVertex(-fHalfWidth + ((j + 1) * fCellWidth), -fHalfHeight + (i * fCellHeight), +fHalfDepth));
+			SetPolygon(k++, pFrontFace);
+		}
+	}
 
-	// 5. 뒤쪽 벽 (Back Face, 분할 없이 1장)
-	CPolygon* pBackFace = new CPolygon(4);
-	pBackFace->SetVertex(0, CVertex(-fHalfWidth, -fHalfHeight, -fHalfDepth));
-	pBackFace->SetVertex(1, CVertex(+fHalfWidth, -fHalfHeight, -fHalfDepth));
-	pBackFace->SetVertex(2, CVertex(+fHalfWidth, +fHalfHeight, -fHalfDepth));
-	pBackFace->SetVertex(3, CVertex(-fHalfWidth, +fHalfHeight, -fHalfDepth));
-	SetPolygon(k++, pBackFace);
+	// 5. 뒤쪽 벽 (Back Face) - 분할
+	for (int i = 0; i < nSubRects; i++)
+	{
+		for (int j = 0; j < nSubRects; j++)
+		{
+			CPolygon* pBackFace = new CPolygon(4);
+			pBackFace->SetVertex(0, CVertex(-fHalfWidth + (j * fCellWidth), -fHalfHeight + (i * fCellHeight), -fHalfDepth));
+			pBackFace->SetVertex(1, CVertex(-fHalfWidth + ((j + 1) * fCellWidth), -fHalfHeight + (i * fCellHeight), -fHalfDepth));
+			pBackFace->SetVertex(2, CVertex(-fHalfWidth + ((j + 1) * fCellWidth), -fHalfHeight + ((i + 1) * fCellHeight), -fHalfDepth));
+			pBackFace->SetVertex(3, CVertex(-fHalfWidth + (j * fCellWidth), -fHalfHeight + ((i + 1) * fCellHeight), -fHalfDepth));
+			SetPolygon(k++, pBackFace);
+		}
+	}
 
 	m_xmOOBB = BoundingOrientedBox(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(fHalfWidth, fHalfHeight, fHalfDepth), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 }

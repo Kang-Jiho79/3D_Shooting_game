@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Camera.h"
 
@@ -17,10 +17,10 @@ struct CProjectedPolygon
 {
 	POINT	ptVertices[10];
 	int		nVertices;
-	float	fDepth;		// ·»´õ¸µ ½ÃÁ¡ÀÇ Æò±Õ Z(±íÀÌ)°ª
+	float	fDepth;		// ë Œë”ë§ ì‹œì ì˜ í‰ê·  Z(ê¹Šì´)ê°’
 	COLORREF color;
 
-	// Z°ªÀÌ Å«(¸Ö¸® ÀÖ´Â) Æú¸®°ïºÎÅÍ ¸ÕÀú ±×¸®µµ·Ï ³»¸²Â÷¼ø Á¤·Ä
+	// Zê°’ì´ í°(ë©€ë¦¬ ìˆëŠ”) í´ë¦¬ê³¤ë¶€í„° ë¨¼ì € ê·¸ë¦¬ë„ë¡ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 	bool operator<(const CProjectedPolygon& other) const {
 		return fDepth > other.fDepth;
 	}
@@ -34,6 +34,10 @@ public:
 
 	int							m_nVertices;
 	CVertex						*m_pVertices;
+
+	// ğŸ’¡ ì¶”ê°€: í´ë¦¬ê³¤ ê³ ìœ  ìƒ‰ìƒ ì†ì„±
+	bool						m_bHasColor; 
+	DWORD						m_dwColor;   
 
 	void SetVertex(int nIndex, CVertex& vertex);
 };
@@ -85,5 +89,6 @@ public:
 	CAirplaneMesh(float fWidth = 20.0f, float fHeight = 20.0f, float fDepth = 4.0f);
 	virtual ~CAirplaneMesh();
 };
+
 
 
